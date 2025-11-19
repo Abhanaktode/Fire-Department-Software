@@ -100,26 +100,12 @@
         </button>
       </div>
 
-      <!-- Search Bar -->
-      <div class="mb-8">
-        <div class="relative max-w-2xl">
-          <input 
-            type="text" 
-            id="searchInput" 
-            onkeyup="searchTips()"
-            class="w-full p-4 pl-12 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" 
-            placeholder="Search fire safety tips..."
-          >
-          <i class="fas fa-search absolute left-4 top-5 text-gray-400"></i>
-        </div>
-      </div>
-
       <!-- Featured Alert -->
       <div class="bg-gradient-to-r from-red-600 to-orange-500 text-white p-6 rounded-xl shadow-lg mb-8">
         <div class="flex items-center gap-4">
           <i class="fas fa-shield-alt text-5xl"></i>
           <div>
-            <h3 class="text-2xl font-bold mb-2">Fire Safety Week 2024</h3>
+            <h3 class="text-2xl font-bold mb-2">Fire Safety Week 2025</h3>
             <p class="text-lg">Join us in promoting fire safety awareness. Learn, practice, and share these life-saving tips with your community.</p>
           </div>
         </div>
@@ -359,49 +345,7 @@
 
       </div>
 
-      <!-- Quick Reference Cards -->
-      <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
-        <h3 class="text-2xl font-bold text-red-600 mb-6">Quick Reference Guide</h3>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="border-2 border-red-200 rounded-lg p-6 hover:border-red-600 transition">
-            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-              <i class="fas fa-phone text-red-600 text-2xl"></i>
-            </div>
-            <h4 class="font-bold text-center mb-2">Emergency Number</h4>
-            <p class="text-3xl font-bold text-red-600 text-center">101</p>
-            <p class="text-sm text-gray-600 text-center mt-2">Fire & Rescue Services</p>
-          </div>
-
-          <div class="border-2 border-orange-200 rounded-lg p-6 hover:border-orange-600 transition">
-            <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-              <i class="fas fa-clock text-orange-600 text-2xl"></i>
-            </div>
-            <h4 class="font-bold text-center mb-2">Average Response</h4>
-            <p class="text-3xl font-bold text-orange-600 text-center">5-8 min</p>
-            <p class="text-sm text-gray-600 text-center mt-2">In urban areas</p>
-          </div>
-
-          <div class="border-2 border-blue-200 rounded-lg p-6 hover:border-blue-600 transition">
-            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-              <i class="fas fa-home text-blue-600 text-2xl"></i>
-            </div>
-            <h4 class="font-bold text-center mb-2">Home Fires</h4>
-            <p class="text-3xl font-bold text-blue-600 text-center">Every 24s</p>
-            <p class="text-sm text-gray-600 text-center mt-2">A home fire is reported</p>
-          </div>
-
-          <div class="border-2 border-green-200 rounded-lg p-6 hover:border-green-600 transition">
-            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-              <i class="fas fa-shield-alt text-green-600 text-2xl"></i>
-            </div>
-            <h4 class="font-bold text-center mb-2">Prevention</h4>
-            <p class="text-3xl font-bold text-green-600 text-center">90%</p>
-            <p class="text-sm text-gray-600 text-center mt-2">Of fires are preventable</p>
-          </div>
-        </div>
-      </div>
-
+     
       <!-- Downloadable Resources -->
       <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
         <h3 class="text-2xl font-bold text-red-600 mb-6">Downloadable Resources</h3>
@@ -507,6 +451,84 @@
     </div>
   </div>
 
+  <!-- Quiz Modal -->
+  <div id="quizModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-gradient-to-r from-red-600 to-orange-600 text-white p-6">
+        <div class="flex justify-between items-start">
+          <div>
+            <h3 class="text-2xl font-bold mb-2">Fire Safety Quiz</h3>
+            <p class="text-sm opacity-90">Test your knowledge</p>
+          </div>
+          <button onclick="closeQuiz()" class="text-white hover:text-gray-200 text-3xl leading-none">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="p-8">
+        <!-- Quiz Start Screen -->
+        <div id="quizStart" class="text-center">
+          <i class="fas fa-clipboard-check text-6xl text-red-600 mb-4"></i>
+          <h4 class="text-2xl font-bold mb-4">Ready to Test Your Fire Safety Knowledge?</h4>
+          <p class="text-gray-600 mb-6">This quiz contains 10 questions about fire safety. You'll get your score at the end!</p>
+          <button onclick="startQuizGame()" class="px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition text-lg">
+            <i class="fas fa-play mr-2"></i>Start Quiz
+          </button>
+        </div>
+
+        <!-- Quiz Questions -->
+        <div id="quizQuestions" class="hidden">
+          <div class="mb-6">
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-sm font-semibold text-gray-600">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span></span>
+              <span class="text-sm font-semibold text-red-600">Score: <span id="currentScore">0</span></span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+              <div id="quizProgress" class="bg-red-600 h-2 rounded-full transition-all duration-300" style="width: 10%"></div>
+            </div>
+          </div>
+
+          <div id="questionContainer" class="mb-6">
+            <h4 id="questionText" class="text-xl font-bold mb-6"></h4>
+            <div id="answersContainer" class="space-y-3">
+              <!-- Answers will be inserted here -->
+            </div>
+          </div>
+
+          <div id="feedback" class="hidden mb-6">
+            <!-- Feedback will be shown here -->
+          </div>
+
+          <button id="nextButton" onclick="nextQuestion()" class="hidden w-full px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition">
+            Next Question <i class="fas fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+
+        <!-- Quiz Results -->
+        <div id="quizResults" class="hidden text-center">
+          <div id="resultIcon" class="text-6xl mb-4"></div>
+          <h4 id="resultTitle" class="text-3xl font-bold mb-4"></h4>
+          <p id="resultMessage" class="text-xl text-gray-600 mb-6"></p>
+          
+          <div class="bg-gray-100 rounded-lg p-6 mb-6">
+            <div class="text-5xl font-bold text-red-600 mb-2"><span id="finalScore">0</span>%</div>
+            <p class="text-gray-600">You answered <span id="correctAnswers">0</span> out of <span id="totalQuestionsResult">10</span> questions correctly</p>
+          </div>
+
+          <div class="space-y-3">
+            <button onclick="restartQuiz()" class="w-full px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition">
+              <i class="fas fa-redo mr-2"></i>Try Again
+            </button>
+            <button onclick="closeQuiz()" class="w-full px-6 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition">
+              Close Quiz
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal for Detailed Tips -->
   <div id="tipModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
     <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
@@ -525,15 +547,6 @@
       <div class="p-8">
         <div id="modalContent" class="prose max-w-none">
           <!-- Content will be inserted here -->
-        </div>
-
-        <div class="mt-8 flex gap-4">
-          <button onclick="shareTip()" class="flex-1 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
-            <i class="fas fa-share-alt mr-2"></i>Share
-          </button>
-          <button onclick="printTip()" class="flex-1 px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700 transition">
-            <i class="fas fa-print mr-2"></i>Print
-          </button>
         </div>
       </div>
     </div>
@@ -557,6 +570,74 @@
   </style>
 
   <script>
+    // Quiz Data
+    const quizQuestions = [
+      {
+        question: "How often should you test your smoke alarms?",
+        answers: ["Once a year", "Once a month", "Every 6 months", "Only when battery is low"],
+        correct: 1,
+        explanation: "You should test your smoke alarms at least once a month using the test button to ensure they're working properly."
+      },
+      {
+        question: "What does PASS stand for when using a fire extinguisher?",
+        answers: ["Point, Aim, Spray, Stop", "Pull, Aim, Squeeze, Sweep", "Press, Activate, Spray, Stop", "Pull, Apply, Spray, Seal"],
+        correct: 1,
+        explanation: "PASS stands for Pull (the pin), Aim (at the base of the fire), Squeeze (the handle), and Sweep (from side to side)."
+      },
+      {
+        question: "If your clothes catch on fire, what should you do?",
+        answers: ["Run to find water", "Stop, Drop, and Roll", "Try to pat it out with your hands", "Keep moving to blow it out"],
+        correct: 1,
+        explanation: "Stop, Drop, and Roll is the correct technique. Stop immediately, drop to the ground, cover your face, and roll to extinguish flames."
+      },
+      {
+        question: "How many smoke alarms should you have in your home?",
+        answers: ["One per floor", "One in the kitchen only", "In every bedroom, outside sleeping areas, and on every level", "Just one near the stairs"],
+        correct: 2,
+        explanation: "Install smoke alarms in every bedroom, outside each sleeping area, and on every level of the home including the basement."
+      },
+      {
+        question: "What is the most common cause of home fires?",
+        answers: ["Electrical problems", "Cooking", "Heating equipment", "Candles"],
+        correct: 1,
+        explanation: "Cooking is the leading cause of home fires and injuries. Never leave cooking unattended."
+      },
+      {
+        question: "Before opening a door during a fire, you should:",
+        answers: ["Open it quickly", "Check if it's hot with the back of your hand", "Break it down", "Wait for firefighters"],
+        correct: 1,
+        explanation: "Feel the door with the back of your hand before opening. If it's hot, use another exit route as fire may be on the other side."
+      },
+      {
+        question: "How long do you have to escape once a smoke alarm sounds?",
+        answers: ["15-20 minutes", "10-15 minutes", "Less than 3 minutes", "5-10 minutes"],
+        correct: 2,
+        explanation: "You may have less than 3 minutes to escape a home fire. That's why it's crucial to have and practice an escape plan."
+      },
+      {
+        question: "What should you do if you encounter smoke while escaping?",
+        answers: ["Stand up and run through it", "Go back and find another way", "Crawl low under the smoke", "Cover your face with a wet cloth and walk"],
+        correct: 2,
+        explanation: "Smoke rises, so crawl low under the smoke to exit. The air is clearer and cooler near the floor."
+      },
+      {
+        question: "How often should smoke alarm batteries be replaced?",
+        answers: ["Every 5 years", "At least once a year", "Every 2 years", "Only when they beep"],
+        correct: 1,
+        explanation: "Replace batteries at least once a year, or as soon as the low battery warning chirps. Never ignore a chirping smoke alarm."
+      },
+      {
+        question: "Once you escape a burning building, should you go back inside?",
+        answers: ["Yes, to get valuables", "Yes, to help others", "No, never go back inside", "Only if the fire is small"],
+        correct: 2,
+        explanation: "NEVER go back inside a burning building for any reason. Once you're out, stay out and wait for firefighters."
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let selectedAnswer = null;
+
     const tipsData = {
       1: {
         title: "Smoke Detectors",
@@ -646,6 +727,173 @@
         `
       }
     };
+
+    function startQuiz() {
+      document.getElementById('quizModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('quizStart').classList.remove('hidden');
+      document.getElementById('quizQuestions').classList.add('hidden');
+      document.getElementById('quizResults').classList.add('hidden');
+    }
+
+    function startQuizGame() {
+      currentQuestionIndex = 0;
+      score = 0;
+      selectedAnswer = null;
+      
+      document.getElementById('quizStart').classList.add('hidden');
+      document.getElementById('quizQuestions').classList.remove('hidden');
+      document.getElementById('totalQuestions').textContent = quizQuestions.length;
+      document.getElementById('currentScore').textContent = score;
+      
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const question = quizQuestions[currentQuestionIndex];
+      
+      document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+      document.getElementById('questionText').textContent = question.question;
+      document.getElementById('feedback').classList.add('hidden');
+      document.getElementById('nextButton').classList.add('hidden');
+      
+      const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+      document.getElementById('quizProgress').style.width = progress + '%';
+      
+      const answersContainer = document.getElementById('answersContainer');
+      answersContainer.innerHTML = '';
+      
+      question.answers.forEach((answer, index) => {
+        const button = document.createElement('button');
+        button.className = 'answer-btn w-full p-4 text-left border-2 border-gray-300 rounded-lg hover:border-red-600 hover:bg-red-50 transition';
+        button.innerHTML = `
+          <div class="flex items-center">
+            <span class="w-8 h-8 rounded-full border-2 border-gray-400 flex items-center justify-center mr-3 font-bold">${String.fromCharCode(65 + index)}</span>
+            <span>${answer}</span>
+          </div>
+        `;
+        button.onclick = () => selectAnswer(index, button);
+        answersContainer.appendChild(button);
+      });
+      
+      selectedAnswer = null;
+    }
+
+    function selectAnswer(index, button) {
+      if (selectedAnswer !== null) return;
+      
+      selectedAnswer = index;
+      const question = quizQuestions[currentQuestionIndex];
+      const allButtons = document.querySelectorAll('.answer-btn');
+      
+      allButtons.forEach((btn, i) => {
+        btn.disabled = true;
+        btn.style.pointerEvents = 'none';
+        
+        if (i === question.correct) {
+          btn.classList.remove('border-gray-300');
+          btn.classList.add('border-green-500', 'bg-green-50');
+          btn.querySelector('span').classList.add('text-green-600');
+        } else if (i === selectedAnswer && i !== question.correct) {
+          btn.classList.remove('border-gray-300');
+          btn.classList.add('border-red-500', 'bg-red-50');
+          btn.querySelector('span').classList.add('text-red-600');
+        }
+      });
+      
+      const isCorrect = selectedAnswer === question.correct;
+      if (isCorrect) {
+        score++;
+        document.getElementById('currentScore').textContent = score;
+      }
+      
+      showFeedback(isCorrect, question.explanation);
+      document.getElementById('nextButton').classList.remove('hidden');
+    }
+
+    function showFeedback(isCorrect, explanation) {
+      const feedback = document.getElementById('feedback');
+      feedback.classList.remove('hidden');
+      
+      if (isCorrect) {
+        feedback.innerHTML = `
+          <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+            <div class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 text-2xl mr-3"></i>
+              <div>
+                <p class="font-bold text-green-800 mb-1">Correct!</p>
+                <p class="text-green-700">${explanation}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        feedback.innerHTML = `
+          <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div class="flex items-start">
+              <i class="fas fa-times-circle text-red-500 text-2xl mr-3"></i>
+              <div>
+                <p class="font-bold text-red-800 mb-1">Incorrect</p>
+                <p class="text-red-700">${explanation}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function nextQuestion() {
+      currentQuestionIndex++;
+      
+      if (currentQuestionIndex < quizQuestions.length) {
+        loadQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function showResults() {
+      document.getElementById('quizQuestions').classList.add('hidden');
+      document.getElementById('quizResults').classList.remove('hidden');
+      
+      const percentage = Math.round((score / quizQuestions.length) * 100);
+      document.getElementById('finalScore').textContent = percentage;
+      document.getElementById('correctAnswers').textContent = score;
+      document.getElementById('totalQuestionsResult').textContent = quizQuestions.length;
+      
+      let resultIcon, resultTitle, resultMessage;
+      
+      if (percentage >= 90) {
+        resultIcon = '🏆';
+        resultTitle = 'Outstanding!';
+        resultMessage = 'You\'re a fire safety expert! Keep up the excellent knowledge.';
+      } else if (percentage >= 70) {
+        resultIcon = '🎉';
+        resultTitle = 'Great Job!';
+        resultMessage = 'You have a solid understanding of fire safety. Review the tips to improve further.';
+      } else if (percentage >= 50) {
+        resultIcon = '👍';
+        resultTitle = 'Good Effort!';
+        resultMessage = 'You\'re on the right track. Review our fire safety tips to strengthen your knowledge.';
+      } else {
+        resultIcon = '📚';
+        resultTitle = 'Keep Learning!';
+        resultMessage = 'Fire safety is important. Please review our safety tips and resources to improve your knowledge.';
+      }
+      
+      document.getElementById('resultIcon').textContent = resultIcon;
+      document.getElementById('resultTitle').textContent = resultTitle;
+      document.getElementById('resultMessage').textContent = resultMessage;
+    }
+
+    function restartQuiz() {
+      startQuizGame();
+    }
+
+    function closeQuiz() {
+      document.getElementById('quizModal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
 
     function filterCategory(category) {
       const buttons = document.querySelectorAll('.filter-btn');
